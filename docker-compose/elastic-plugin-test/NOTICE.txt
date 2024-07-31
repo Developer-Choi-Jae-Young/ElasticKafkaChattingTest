@@ -1,0 +1,2 @@
+elasticsearch 초성검색을 위한
+Custom Filter
