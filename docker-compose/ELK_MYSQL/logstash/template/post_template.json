@@ -1,0 +1,36 @@
+{
+    "index_patterns": ["mysql-*"],
+    "priority": 100,
+    "template" : {
+      "settings": {
+        "analysis": {
+          "analyzer": {
+            "jamo_analyzer": {
+              "tokenizer": "ngram_token",
+              "filter": [
+                "lowercase",
+                "jamo-filter"
+              ]
+            }
+          },
+          "filter": {
+            "jamo-filter": {
+              "type": "jamo_filter",
+              "name": "jamo_filter"
+            }
+          },
+          "tokenizer": {
+            "ngram_token": {
+              "type": "edge_ngram",
+              "min_gram": 1,
+              "max_gram": 30,
+              "token_chars": [
+                "letter",
+                "digit"
+              ]
+            }
+          }
+        }
+      }
+  }
+}
