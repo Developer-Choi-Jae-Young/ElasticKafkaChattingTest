@@ -53,6 +53,7 @@ services:
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,Z
       - elasticsearch:/usr/share/elasticsearch/data:Z
+      - ./elasticsearch/plugin:/usr/share/elasticsearch/plugin:Z
     ports:
       - 9200:9200
       - 9300:9300
@@ -81,6 +82,7 @@ services:
       - ./logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro,Z
       - ./logstash/input:/usr/share/logstash/input:ro,Z
       - ./logstash/jdbc:/usr/share/logstash/jdbc:ro,Z
+      - ./logstash/template:/usr/share/logstash/template:ro,Z
     ports:
       - 5604:5044
       - 50000:50000/tcp
@@ -119,6 +121,8 @@ services:
       - 5000:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Seoul
+      LANG: C.UTF-8
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
@@ -128,8 +132,6 @@ services:
 networks:
   elk:
     driver: bridge
-    external: true
-    internal: true
 
 
 volumes:
